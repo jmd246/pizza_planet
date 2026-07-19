@@ -1,0 +1,36 @@
+# ==========================================
+# Java Build Tools Output
+# ==========================================
+target/
+bin/
+build/
+.gradle/
+.nb-gradle/
+
+# ==========================================
+# VS Code Java Project Specifics
+# ==========================================
+.vscode/
+.apt_generated/
+.processor/
+.factorypath
+*.client
+*.cf
+
+# ==========================================
+# Java & OS Metadata
+# ==========================================
+*.class
+*.log
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# Optional: Eclipse/Maven Metadata 
+# (Only keep if you share the project with Eclipse users)
+# ==========================================
+.classpath
+.project
+.settings/
+*.launch
+
