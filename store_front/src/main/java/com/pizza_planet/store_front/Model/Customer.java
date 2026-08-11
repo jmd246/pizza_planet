@@ -6,6 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 @Entity
 @Table(name = "customers")
@@ -17,8 +21,15 @@ public class Customer extends Account{
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int customerID;
+    Long customerID;
+    @OneToMany(mappedBy = "customer")
     List<Order> orders;
+    @ManyToMany
+    @JoinTable(
+        name = "customer_favorite_pizzas",
+        joinColumns = @JoinColumn(name = "customer_id"),
+        inverseJoinColumns = @JoinColumn(name = "pizza_id")
+    )
     List<Pizza> favoritePizzas;
     public List<Order> getOrders() {
         return orders;
@@ -40,7 +51,7 @@ public class Customer extends Account{
         hash = 29 * hash + Objects.hashCode(this.password);
         hash = 29 * hash + Objects.hashCode(this.dob);
         hash = 29 * hash + Objects.hashCode(this.enrollmentDate);
-        hash = 29 * hash + this.customerID;
+        hash = 29 * hash + Objects.hashCode(this.customerID);
         return hash;
     }
     @Override
@@ -67,7 +78,7 @@ public class Customer extends Account{
         return true;
     }  
 
-    public int getCustomerID() {
+    public Long getCustomerID() {
         return customerID;
     }
     @Override

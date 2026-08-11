@@ -18,8 +18,4 @@ public class ToppingController {
     public ResponseEntity<List<Topping>> getToppings() {
         return ResponseEntity.ok(toppingRepo.findAll());
     }
-    
-
-
-    
 }

@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 public class Topping{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long   id;
     @Column(name = "topping_name")
     private String name;
     @Enumerated(EnumType.STRING)
@@ -30,10 +30,10 @@ public class Topping{
     }
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getName() {
@@ -83,8 +83,13 @@ public class Topping{
             return false;
         if (type != other.type)
             return false;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
         return true;
     }
     
     
-}
+}       

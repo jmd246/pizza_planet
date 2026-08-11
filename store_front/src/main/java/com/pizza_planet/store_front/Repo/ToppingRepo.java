@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.pizza_planet.store_front.Model.Topping;
 
-public interface ToppingRepo extends JpaRepository<Topping, Integer> {
+public interface ToppingRepo extends JpaRepository<Topping, Long> {
+    @Override
     List<Topping> findAll();
 }
