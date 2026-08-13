@@ -19,8 +19,8 @@ public class Admin extends Account {
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int adminID;
-    public int getAdminID() {
+    Long adminID;
+    public Long getAdminID() {
         return adminID;
     }
     @Override
@@ -36,9 +36,9 @@ public class Admin extends Account {
         hash = 29 * hash + Objects.hashCode(this.password);
         hash = 29 * hash + Objects.hashCode(this.dob);
         hash = 29 * hash + Objects.hashCode(this.enrollmentDate);
-        hash = 29 * hash + this.adminID;
+        hash = 29 * hash + Objects.hashCode(this.adminID);
         return hash;
-    }
+    }       
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -48,7 +48,7 @@ public class Admin extends Account {
         if (getClass() != obj.getClass())
             return false;
         Admin other = (Admin) obj;
-        if (adminID != other.adminID)
+        if (!adminID.equals(other.adminID))
             return false;
         else if (dob == null) {
             if (other.dob != null)

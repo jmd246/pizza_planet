@@ -4,16 +4,20 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import jakarta.validation.constraints.Email;
 public abstract class Account{
     // i as a user have a name email birthday password and address
-    String name,username;
-    String password;
+     String name,username;
+     String password;
 
 
 
     LocalDate dob;
     
-    Date enrollmentDate;        
+    Date enrollmentDate;
+    @Email
+    String Email;
+
     public void setDOB(String dob){
        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
        LocalDate parsedDob = LocalDate.parse(dob,format);
@@ -46,6 +50,7 @@ public abstract class Account{
     public void setEnrollmentDate(Date enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
     }
+
     
 
 }

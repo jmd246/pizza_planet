@@ -4,16 +4,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,16 +20,12 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderID;
-
-    // An order can contain multiple pizzas,
-    // and a pizza can belong to multiple orders.
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "order_pizzas",
-        joinColumns = @JoinColumn(name = "order_id"),
-        inverseJoinColumns = @JoinColumn(name = "pizza_id")
+    @OneToMany(mappedBy = "order",
+        orphanRemoval = true,
+        cascade = jakarta.persistence.CascadeType.ALL
     )
-    private List<Pizza> pizzas;
+ 
+    private List<OrderItem> pizzas;
 
     // Order date
     private Date orderDate;
@@ -48,17 +41,17 @@ public class Order {
     public Order() {
     }
 
-    public Order(List<Pizza> pizzas, Date orderDate, OrderStatus status) {
+    public Order(List<OrderItem> pizzas, Date orderDate, OrderStatus status) {
         this.pizzas = pizzas;
         this.orderDate = orderDate;
         this.status = status;
     }
 
-    public List<Pizza> getPizzas() {
+    public List<OrderItem> getPizzas() {
         return pizzas;
     }
 
-    public void setPizzas(List<Pizza> pizzas) {
+    public void setPizzas(List<OrderItem> pizzas) {
         this.pizzas = pizzas;
     }
 
