@@ -19,7 +19,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderID;
+    private Long id;
     @OneToMany(mappedBy = "order",
         orphanRemoval = true,
         cascade = jakarta.persistence.CascadeType.ALL
@@ -71,12 +71,12 @@ public class Order {
         this.status = status;
     }
 
-    public Long getOrderID() {
-        return orderID;
+    public Long getOrderId() {
+        return id;
     }
 
-    public void setOrderID(Long orderID) {
-        this.orderID = orderID;
+    public void setOrderId(Long orderID) {
+        this.id = orderID;
     }
 
     public Customer getCustomer() {
@@ -122,7 +122,7 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "orderID=" + orderID +
+                "orderID=" + id +
                 ", pizzas=" + pizzas +
                 ", orderDate=" + orderDate +
                 ", status=" + status +

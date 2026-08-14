@@ -1,12 +1,15 @@
 package com.pizza_planet.store_front.Controller;
 
+import java.util.Optional;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pizza_planet.store_front.Model.Customer;
-import com.pizza_planet.store_front.Model.LoginRequest;
+import com.pizza_planet.store_front.Model.DTO.LoginRequest;
 import com.pizza_planet.store_front.Service.CustomerAccountService;
 
 
@@ -15,6 +18,11 @@ public class AccountController {
     private CustomerAccountService accountService; 
     public AccountController(CustomerAccountService service){
         this.accountService = service;
+    }
+    //home page
+    @GetMapping("/")
+    public ResponseEntity<String> Home(){
+        return ResponseEntity.ok("Welcome To Pizza Planet");
     }
     //create an endpoint for creating a new account
     @PostMapping("/new_account")
@@ -33,6 +41,7 @@ public class AccountController {
         accountService.createPassword(customer,customer.getPassword());
         return ResponseEntity.ok(customer);
     }
+    
     //create an endpoint for logging in
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest info) {
@@ -44,8 +53,19 @@ public class AccountController {
             return ResponseEntity.badRequest().build();
         }
         // grab user based on name provided trhen check the password
-        return accountService.checkPassword(rawPassword, acc) 
+        Optional<Customer> pot_account = accountService.fetchWithUserName(info.getUsername());
+        if (pot_account.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
+
+        if (accountService.checkPassword(info.getPassword(),pot_account.get())){
+            return ResponseEntity.ok(pot_account.get());
+        }
+        else{
+            return ResponseEntity.badRequest().build();
+        }
     }
+    
     
     //create an endpoint for logging out
     //create an endpoint for updating account information

@@ -1,5 +1,6 @@
 package com.pizza_planet.store_front.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,7 +37,7 @@ public class Pizza {
         joinColumns = @JoinColumn(name = "pizza_id"),
         inverseJoinColumns = @JoinColumn(name = "topping_id")
     )
-    List<Topping> toppings;
+    List<Topping> toppings = new ArrayList<>() ;
     public Pizza(String name, Long id) {
         this.name = name;
         this.id = id;

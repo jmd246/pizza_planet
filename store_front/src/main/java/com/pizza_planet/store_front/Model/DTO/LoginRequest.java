@@ -1,4 +1,4 @@
-package com.pizza_planet.store_front.Model;
+package com.pizza_planet.store_front.Model.DTO;
 
 public class LoginRequest {
     String username,password;

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,11 +17,6 @@ public class PizzaController {
 
     public PizzaController(PizzaService pizzaService) {
         this.pizzaService = pizzaService;
-    }
-   
-    @GetMapping("/pizzas/id/{id}")
-    public ResponseEntity<Pizza> getPizzaById(@PathVariable Long id) {
-        return ResponseEntity.ok(pizzaService.getPizzaById(id));
     }
     @GetMapping("/pizzas")
     public ResponseEntity<?> getPizzas(

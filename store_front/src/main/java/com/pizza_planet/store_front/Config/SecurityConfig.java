@@ -1,14 +1,43 @@
 package com.pizza_planet.store_front.Config;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+
     @Bean
     public PasswordEncoder passwordEncoder() {
-        //define a custome cost factor (e.g 12 riounds) for increased security
         return new BCryptPasswordEncoder(12);
     }
+    //this allows us to configure what gets exposed and what is behind auth
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                    "/",
+                    "/pizzas**",
+                    "/toppings**",
+                    "/login",
+                    "/register",
+                    "/css/**",
+                    "/js/**",
+                    "/images/**"
+                ).permitAll()
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .permitAll()
+            );
+
+        return http.build();
+    }
+
+   
 }
