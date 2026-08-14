@@ -9,25 +9,31 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
+    private final int securityLevel = 12;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(12);
+        return new BCryptPasswordEncoder(securityLevel);
     }
-    //this allows us to configure what gets exposed and what is behind auth
+
+    /*
+        defines which HTTP requests are allowed without authentication
+         and which require authentication.
+    */
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/",
-                    "/pizzas**",
-                    "/toppings**",
-                    "/login",
-                    "/register",
-                    "/css/**",
-                    "/js/**",
-                    "/images/**"
+            .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                    .requestMatchers(
+                        "/",
+                        "/pizzas**",
+                        "/toppings**",
+                        "/login",
+                        "/register",
+                        "/css/**",
+                        "/js/**",
+                        "/images/**"
                 ).permitAll()
                 .anyRequest().authenticated()
             )

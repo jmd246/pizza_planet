@@ -2,6 +2,38 @@ package com.pizza_planet.store_front.Model.DTO;
 
 public class CustomerDTO {
     //name username and password can travel but not the whole customer object
+    String name,username,password;
+    
+    public CustomerDTO(String name, String username, String password) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
 
 
     

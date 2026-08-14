@@ -2,17 +2,28 @@ package com.pizza_planet.store_front.Model;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 @Entity
-@Table(name = "customers")
+@Table(
+    name = "customers",
+        uniqueConstraints = {
+        @UniqueConstraint(name = "uk_customer_username", columnNames = "username"),
+        @UniqueConstraint(name = "uk_customer_email", columnNames = "email")
+    }
+)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Customer extends Account{
     public Customer(String name,String username,String password){
         this.name = name;
@@ -21,6 +32,7 @@ public class Customer extends Account{
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customer_id")
     Long customerID;
     @OneToMany(mappedBy = "customer")
     List<Order> orders;
