@@ -31,3 +31,14 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+#docker generated stuff
+
+.docker/
+docker-compose.override.yml
+
+# Docker environment/secrets
+.env
+.env.*
+!.env.example
