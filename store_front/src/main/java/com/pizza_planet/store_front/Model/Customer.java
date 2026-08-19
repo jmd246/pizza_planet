@@ -25,10 +25,11 @@ import jakarta.persistence.UniqueConstraint;
 )
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Customer extends Account{
-    public Customer(String name,String username,String password){
+    public Customer(String name,String username,String password,String email) {
         this.name = name;
         this.username = username;
         this.password = password;
+        this.email=email;
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

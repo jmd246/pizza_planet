@@ -22,7 +22,7 @@ public abstract class Account{
     Date enrollmentDate;
     @Column(unique = true, nullable = false)
     @Email
-    String Email;
+    String email;
     @Column(nullable = false)
     String name;
 
@@ -59,10 +59,10 @@ public abstract class Account{
         this.enrollmentDate = enrollmentDate;
     }
     public String getEmail() {
-        return Email;
+        return email;
     }
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     
