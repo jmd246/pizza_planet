@@ -15,10 +15,10 @@ public class Topping{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long   id;
-    @Column(name = "topping_name")
+    @Column(name = "topping_name", nullable = false, unique = true)
     private String name;
     @Enumerated(EnumType.STRING)
-    @Column(name = "category")
+    @Column(name = "category", nullable = false)
     private ToppingType type;
 
 

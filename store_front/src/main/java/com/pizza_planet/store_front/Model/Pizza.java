@@ -1,8 +1,7 @@
 package com.pizza_planet.store_front.Model;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,10 +19,10 @@ public class Pizza {
 
     @Column(name = "pizza_name")
     String name;
-    public List<Topping> getToppings() {
+    public Set<Topping> getToppings() {
         return toppings;
     }
-    public void setToppings(List<Topping> toppings) {
+    public void setToppings(Set<Topping> toppings) {
         this.toppings = toppings;
     }
 
@@ -37,7 +36,7 @@ public class Pizza {
         joinColumns = @JoinColumn(name = "pizza_id"),
         inverseJoinColumns = @JoinColumn(name = "topping_id")
     )
-    List<Topping> toppings = new ArrayList<>() ;
+    Set<Topping> toppings = new HashSet<>() ;
     public Pizza(String name, Long id) {
         this.name = name;
         this.id = id;
