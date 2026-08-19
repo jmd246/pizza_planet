@@ -28,6 +28,11 @@ public class Topping{
         this.name = name;
         this.type = type;
     }
+    public Topping(Long id, String name, ToppingType type) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+    }
 
 
     public Long getId() {

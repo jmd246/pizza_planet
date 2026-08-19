@@ -17,7 +17,7 @@ public class Pizza {
     public Pizza() {
     }
 
-    @Column(name = "pizza_name")
+    @Column(name = "pizza_name", nullable = false, unique = true)
     String name;
     public Set<Topping> getToppings() {
         return toppings;
