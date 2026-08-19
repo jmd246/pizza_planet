@@ -3,10 +3,13 @@ package com.pizza_planet.store_front.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.springframework.stereotype.Service;
+
 import com.pizza_planet.store_front.Model.Topping;
 import com.pizza_planet.store_front.Model.ToppingType;
 import com.pizza_planet.store_front.Repo.ToppingRepo;
 
+@Service
 public class ToppingService {
     private final ToppingRepo toppingRepo;
 
