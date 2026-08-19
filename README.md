@@ -1,0 +1,59 @@
+# Pizza Planet — Store Front
+
+A Spring Boot REST API powering the Pizza Planet storefront: customer accounts, pizzas & toppings, and order management for a small pizza shop.
+
+## Features
+- Customer accounts
+  - Register, login, update account information
+  - Username and email uniqueness checks
+- Pizza catalog
+  - View and search available pizzas
+- Order management
+  - Place orders, view order history
+- Topping management
+  - Add, update, delete toppings
+- Persistence & data
+  - MySQL via Spring Data JPA + Hibernate
+  - Automatic schema management for development
+- Security
+  - Spring Security for authentication/authorization
+  - CSRF configuration for API development
+  - JWT authentication planned
+
+## Tech stack
+- Language: Java 21
+- Framework: Spring Boot 4.x
+- Notable libraries:
+  - Spring Web (webmvc)
+  - Spring Data JPA (Hibernate)
+  - Spring Security
+  - MySQL Connector/J
+  - Lombok (optional dev convenience)
+- Build: Maven (wrapper included)
+
+## Project layout (top-level / important files)
+
+
+How it fits together:
+- StoreFrontApplication boots the app. Controllers expose REST endpoints, delegating to Service classes which implement business logic. Repositories are Spring Data JPA interfaces that persist Model entities to MySQL. Configuration classes hold DB and security setup.
+
+## Quickstart — run locally
+
+Prerequisites:
+- Java 21+
+- Maven (wrapper included so Maven is optional)
+- MySQL database
+
+
+
+## Example API (controller routes may vary — check Controller/ for exact mappings)
+- Customers: GET/POST/PUT /api/customers
+- Pizzas: GET /api/pizzas (search via query params)
+- Orders: POST /api/orders, GET /api/orders/{customerId}
+- Toppings: GET/POST/PUT/DELETE /api/toppings
+
+## Development notes
+- Spring Data JPA repositories live in Repo/, entities and DTOs in Model/.
+- Lombok is included as an optional convenience — enable the Lombok plugin in your IDE for best experience.
+- Security is configured with Spring Security; JWT support is planned but not yet implemented (see Config/).
+- For production, replace `spring.jpa.hibernate.ddl-auto=update` with a proper migration tool (Flyway or Liquibase) and disable automatic schema updates.
