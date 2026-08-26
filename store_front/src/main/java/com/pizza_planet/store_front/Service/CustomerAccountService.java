@@ -8,10 +8,10 @@ import com.pizza_planet.store_front.Model.Account;
 import com.pizza_planet.store_front.Model.Customer;
 import com.pizza_planet.store_front.Model.DTO.CustomerDTO;
 import com.pizza_planet.store_front.Model.DTO.JwtResponse;
+import com.pizza_planet.store_front.Model.DTO.LoginRequest;
 import com.pizza_planet.store_front.Repo.CustomerRepo;
 import com.pizza_planet.store_front.Util.AccountValidationTool;
 import com.pizza_planet.store_front.Util.JWTTokenUtil;
-import com.pizza_planet.store_front.Model.DTO.LoginRequest;
 
 @Service
 public class CustomerAccountService {
@@ -63,7 +63,9 @@ public class CustomerAccountService {
         else{ 
          
             Optional<Customer> account = fetchWithUserName(accInfo.getUsername());
-            Optional<JwtResponse> token = Optional.of(helper.generateToken(account.get().getUsername()));
+            String id = account.get().getCustomerID().toString();
+            System.out.println("id value: " + id);
+            Optional<JwtResponse> token = Optional.of(helper.generateToken(id));
             return token;
         }
     }

@@ -21,9 +21,10 @@ public class JWTTokenUtil {
     private final int min = 15;
     private final Long ttl = min * 60 * 1000L;
     //generate token
-    public JwtResponse generateToken(String username){
+    //take in a user an assign the token their role,username,and ttl
+    public JwtResponse generateToken(String id){
         String token = Jwts.builder()
-                .setIssuer(username)
+                .setSubject(id)
                 .issuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + ttl))
                 .signWith(Keys.hmacShaKeyFor(secret.getBytes()))
@@ -31,13 +32,21 @@ public class JWTTokenUtil {
         return new JwtResponse(token);
     }
     //extract username
-    public String extractUsername(String token){
+    public String extractUserID(String token){
         return Jwts.parser()
                 .setSigningKey(secret.getBytes())
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
-                .getIssuer();
+                .getSubject();
+    }
+    public Date extractTTL(String token){
+        return Jwts.parser()
+                .setSigningKey(secret.getBytes())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getExpiration();
     }
 
 }
