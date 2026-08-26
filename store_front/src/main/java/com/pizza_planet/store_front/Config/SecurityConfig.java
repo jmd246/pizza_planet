@@ -36,11 +36,8 @@ public class SecurityConfig {
                         "/images/**"
                 ).permitAll()
                 .anyRequest().authenticated()
-            )
-            .formLogin(form -> form
-                .loginPage("/login")
-                .permitAll()
             );
+           
 
         return http.build();
     }

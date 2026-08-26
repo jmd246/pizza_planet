@@ -25,6 +25,9 @@ import jakarta.persistence.UniqueConstraint;
 )
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Customer extends Account{
+    //defualt constructor
+    public Customer(){}
+    
     public Customer(String name,String username,String password,String email) {
         this.name = name;
         this.username = username;
